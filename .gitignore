@@ -2,5 +2,5 @@
 hwk_11_ve/
 
 #ignore updates to secrets_example file for api key
-secret_example.py
+secrets_example.py
 
