@@ -14,7 +14,7 @@ def index():
 def user_page(word):
 	baseurl = "http://api.nytimes.com/svc/topstories/v2/technology.json"
 	params_diction = {}
-	params_diction["api-key"] = api_key # from secrets_example.py
+	params_diction["api-key"] = api_key # from secrets_kyle.py (excluded from github)
 	
 	nyt_resp = requests.get(baseurl, params_diction)
 	nyt_data = json.loads(nyt_resp.text)
