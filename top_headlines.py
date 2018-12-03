@@ -6,20 +6,33 @@ import json
 
 app = Flask(__name__)
 
-@app.route('/user/<word>')
-def user_page(word):
-baseurl = "http://api.nytimes.com/svc/search/v2/articlesearch.json"
-params_diction = {}
-params_diction["api-key"] = api_key # from secrets_example.py
-params_diction["section"] = 'technology'
-    
-nyt_resp = requests.get(baseurl, params_diction)
-
-
-@app.route('/')
+@app.route('/') #homepage
 def index():
-    return render_template('index.html')
+	return render_template('index.html')
+
+@app.route('/user/<word>') #user page
+def user_page(word):
+	baseurl = "http://api.nytimes.com/svc/topstories/v2/technology.json"
+	params_diction = {}
+	params_diction["api-key"] = api_key # from secrets_example.py
+	
+	nyt_resp = requests.get(baseurl, params_diction)
+	nyt_data = json.loads(nyt_resp.text)
+	articles = []
+
+	print(nyt_data)
+
+	for result in nyt_data['results'][0:5]:
+		title = result['title']
+		url = result['url']
+		article = title + ' ({})'.format(url)
+		articles.append(article)
+
+	print(articles)
+
+	return render_template('user.html', name = word, section = "technology", articles = articles)
 
 if __name__ == '__main__':
 	app.run(debug=True)
+
 
