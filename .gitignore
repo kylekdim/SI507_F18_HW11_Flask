@@ -1,6 +1,9 @@
 #ignore virtual env directory
 hwk_11_ve/
 
-#ignore updates to secrets_example file for api key
-secrets_example.py
+#ignore py_cache
+__pycache__/
+
+#ignore API key file:
+secrets_kyle.py
 
